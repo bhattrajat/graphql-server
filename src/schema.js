@@ -7,7 +7,7 @@ const typeDefs = gql`
     title: String!
     author: Author!
     thumbnail: String
-    length: Int
+    length: Int @deprecated(reason: "Use durationInSeconds")
     modulesCount: Int
     "The track's complete description, can be in Markdown format"
     description: String
@@ -15,14 +15,18 @@ const typeDefs = gql`
     numberOfViews: Int
     "The track's complete array of Modules"
     modules: [Module!]!
+    "The track's full duration, in seconds"
+    durationInSeconds: Int
   }
   "A Module is a single unit of teaching. Multiple Modules compose a Track"
   type Module {
     id: ID!
     "The Module's title"
     title: String!
-    "The Module's length in minutes"
-    length: Int
+    "The Module's length in seconds"
+    length: Int @deprecated(reason: "Use durationInSeconds")
+    "The module's video duration, in seconds"
+    durationInSeconds: Int
   }
   "Author of a complete Track or a Module"
   type Author {
